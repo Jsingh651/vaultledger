@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VaultLedger</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <span class="logo">₿</span>
+        <h1>VaultLedger</h1>
+      </div>
+      <button class="btn-add" onclick="openModal()">+ Add Transaction</button>
+    </header>
+
+    <section class="summary-cards">
+      <div class="card income">
+        <span class="label">Income</span>
+        <span class="amount" id="total-income">$0.00</span>
+      </div>
+      <div class="card expense">
+        <span class="label">Expenses</span>
+        <span class="amount" id="total-expenses">$0.00</span>
+      </div>
+      <div class="card balance">
+        <span class="label">Balance</span>
+        <span class="amount" id="balance">$0.00</span>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel">
+        <h2>Recent Transactions</h2>
+        <table id="transactions-table">
+          <thead>
+            <tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Budget Progress</h2>
+        <div id="budget-bars"></div>
+        <h2 class="section-sub">Spending by Category</h2>
+        <div id="category-chart"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>New Transaction</h2>
+      <form id="tx-form">
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" name="amount" placeholder="Amount" step="0.01" min="0.01" required>
+        <select name="type">
+          <option value="EXPENSE">Expense</option>
+          <option value="INCOME">Income</option>
+        </select>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="date" name="date" required>
+        <div class="modal-actions">
+          <button type="button" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
+
