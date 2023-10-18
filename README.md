@@ -10,3 +10,15 @@ Personal finance tracker with a Spring Boot REST API and web dashboard. Track in
 - H2 embedded database with seed data
 - REST API for integrations
 
+## Quick Start
+
+```bash
+mvn spring-boot:run
+```
+
+Open http://localhost:8080
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
