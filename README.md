@@ -22,3 +22,15 @@ Open http://localhost:8080
 
 | Method | Path | Description |
 |--------|------|-------------|
+| GET | `/api/dashboard` | Summary stats |
+| GET | `/api/transactions` | List transactions |
+| POST | `/api/transactions` | Create transaction |
+| DELETE | `/api/transactions/{id}` | Delete transaction |
+| GET | `/api/budgets` | List budgets |
+
+## Requirements
+
+- Java 17+
+- Maven 3.8+
+
+
