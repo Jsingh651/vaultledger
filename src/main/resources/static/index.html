@@ -17,3 +17,22 @@
       <button class="btn-add" onclick="openModal()">+ Add Transaction</button>
     </header>
 
+    <section class="summary-cards">
+      <div class="card income">
+        <span class="label">Income</span>
+        <span class="amount" id="total-income">$0.00</span>
+      </div>
+      <div class="card expense">
+        <span class="label">Expenses</span>
+        <span class="amount" id="total-expenses">$0.00</span>
+      </div>
+      <div class="card balance">
+        <span class="label">Balance</span>
+        <span class="amount" id="balance">$0.00</span>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel">
+        <h2>Recent Transactions</h2>
+        <table id="transactions-table">
