@@ -83,3 +83,88 @@ if $cygwin; then
   [ -n "$JAVA_HOME" ] \
     && JAVA_HOME=$(cygpath --unix "$JAVA_HOME")
   [ -n "$CLASSPATH" ] \
+    && CLASSPATH=$(cygpath --path --unix "$CLASSPATH")
+fi
+
+# For Mingw, ensure paths are in UNIX format before anything is touched
+if $mingw; then
+  [ -n "$JAVA_HOME" ] && [ -d "$JAVA_HOME" ] \
+    && JAVA_HOME="$(
+      cd "$JAVA_HOME" || (
+        echo "cannot cd into $JAVA_HOME." >&2
+        exit 1
+      )
+      pwd
+    )"
+fi
+
+if [ -z "$JAVA_HOME" ]; then
+  javaExecutable="$(which javac)"
+  if [ -n "$javaExecutable" ] && ! [ "$(expr "$javaExecutable" : '\([^ ]*\)')" = "no" ]; then
+    # readlink(1) is not available as standard on Solaris 10.
+    readLink=$(which readlink)
+    if [ ! "$(expr "$readLink" : '\([^ ]*\)')" = "no" ]; then
+      if $darwin; then
+        javaHome="$(dirname "$javaExecutable")"
+        javaExecutable="$(cd "$javaHome" && pwd -P)/javac"
+      else
+        javaExecutable="$(readlink -f "$javaExecutable")"
+      fi
+      javaHome="$(dirname "$javaExecutable")"
+      javaHome=$(expr "$javaHome" : '\(.*\)/bin')
+      JAVA_HOME="$javaHome"
+      export JAVA_HOME
+    fi
+  fi
+fi
+
+if [ -z "$JAVACMD" ]; then
+  if [ -n "$JAVA_HOME" ]; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ]; then
+      # IBM's JDK on AIX uses strange locations for the executables
+      JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+      JAVACMD="$JAVA_HOME/bin/java"
+    fi
+  else
+    JAVACMD="$(
+      \unset -f command 2>/dev/null
+      \command -v java
+    )"
+  fi
+fi
+
+if [ ! -x "$JAVACMD" ]; then
+  echo "Error: JAVA_HOME is not defined correctly." >&2
+  echo "  We cannot execute $JAVACMD" >&2
+  exit 1
+fi
+
+if [ -z "$JAVA_HOME" ]; then
+  echo "Warning: JAVA_HOME environment variable is not set." >&2
+fi
+
+# traverses directory structure from process work directory to filesystem root
+# first directory with .mvn subdirectory is considered project base directory
+find_maven_basedir() {
+  if [ -z "$1" ]; then
+    echo "Path not specified to find_maven_basedir" >&2
+    return 1
+  fi
+
+  basedir="$1"
+  wdir="$1"
+  while [ "$wdir" != '/' ]; do
+    if [ -d "$wdir"/.mvn ]; then
+      basedir=$wdir
+      break
+    fi
+    # workaround for JBEAP-8937 (on Solaris 10/Sparc)
+    if [ -d "${wdir}" ]; then
+      wdir=$(
+        cd "$wdir/.." || exit 1
+        pwd
+      )
+    fi
+    # end of workaround
+  done
