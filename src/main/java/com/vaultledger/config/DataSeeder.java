@@ -13,3 +13,18 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
+
+    private final TransactionRepository transactionRepo;
+    private final BudgetRepository budgetRepo;
+
+    public DataSeeder(TransactionRepository transactionRepo, BudgetRepository budgetRepo) {
+        this.transactionRepo = transactionRepo;
+        this.budgetRepo = budgetRepo;
+    }
+
+    @Override
+    public void run(String... args) {
+        if (transactionRepo.count() > 0) return;
+
+        String month = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+
