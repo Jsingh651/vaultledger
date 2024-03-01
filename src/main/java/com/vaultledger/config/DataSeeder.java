@@ -28,3 +28,18 @@ public class DataSeeder implements CommandLineRunner {
 
         String month = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
 
+        transactionRepo.save(makeTransaction("Salary", 5200.0, TransactionType.INCOME, "Income", LocalDate.now().minusDays(5)));
+        transactionRepo.save(makeTransaction("Freelance project", 850.0, TransactionType.INCOME, "Income", LocalDate.now().minusDays(12)));
+        transactionRepo.save(makeTransaction("Rent", 1400.0, TransactionType.EXPENSE, "Housing", LocalDate.now().minusDays(3)));
+        transactionRepo.save(makeTransaction("Grocery run", 127.50, TransactionType.EXPENSE, "Food", LocalDate.now().minusDays(1)));
+        transactionRepo.save(makeTransaction("Netflix", 15.99, TransactionType.EXPENSE, "Entertainment", LocalDate.now().minusDays(7)));
+        transactionRepo.save(makeTransaction("Gas", 45.00, TransactionType.EXPENSE, "Transport", LocalDate.now().minusDays(2)));
+        transactionRepo.save(makeTransaction("Coffee shop", 6.50, TransactionType.EXPENSE, "Food", LocalDate.now()));
+
+        budgetRepo.save(makeBudget("Food", 400.0, month));
+        budgetRepo.save(makeBudget("Entertainment", 100.0, month));
+        budgetRepo.save(makeBudget("Transport", 200.0, month));
+    }
+
+    private Transaction makeTransaction(String desc, double amount, TransactionType type, String cat, LocalDate date) {
+        Transaction t = new Transaction();
