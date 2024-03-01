@@ -58,3 +58,4 @@ public class DataSeeder implements CommandLineRunner {
         b.setMonth(month);
         return b;
     }
+}
