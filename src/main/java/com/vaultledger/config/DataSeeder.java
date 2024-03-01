@@ -43,3 +43,18 @@ public class DataSeeder implements CommandLineRunner {
 
     private Transaction makeTransaction(String desc, double amount, TransactionType type, String cat, LocalDate date) {
         Transaction t = new Transaction();
+        t.setDescription(desc);
+        t.setAmount(amount);
+        t.setType(type);
+        t.setCategory(cat);
+        t.setDate(date);
+        return t;
+    }
+
+    private Budget makeBudget(String category, double limit, String month) {
+        Budget b = new Budget();
+        b.setCategory(category);
+        b.setLimitAmount(limit);
+        b.setMonth(month);
+        return b;
+    }
