@@ -22,3 +22,15 @@ public class BudgetController {
     public List<Budget> list(@RequestParam(defaultValue = "") String month) {
         if (month.isEmpty()) {
             month = java.time.LocalDate.now()
+                    .format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM"));
+        }
+        return financeService.getBudgets(month);
+    }
+
+    @PostMapping
+    public Budget create(@Valid @RequestBody Budget budget) {
+        return financeService.createBudget(budget);
+    }
+}
+
+
