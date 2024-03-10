@@ -10,3 +10,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/budgets")
 @CrossOrigin(origins = "*")
+public class BudgetController {
+
+    private final FinanceService financeService;
+
+    public BudgetController(FinanceService financeService) {
+        this.financeService = financeService;
+    }
+
+    @GetMapping
+    public List<Budget> list(@RequestParam(defaultValue = "") String month) {
+        if (month.isEmpty()) {
+            month = java.time.LocalDate.now()
