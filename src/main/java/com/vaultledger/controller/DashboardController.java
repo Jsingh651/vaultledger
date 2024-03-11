@@ -18,3 +18,13 @@ public class DashboardController {
         this.financeService = financeService;
     }
 
+    @GetMapping
+    public DashboardSummary getDashboard() {
+        return financeService.getDashboard();
+    }
+}
+
+
+
+
+
