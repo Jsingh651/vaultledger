@@ -8,3 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/dashboard")
+@CrossOrigin(origins = "*")
+public class DashboardController {
+
+    private final FinanceService financeService;
+
+    public DashboardController(FinanceService financeService) {
+        this.financeService = financeService;
+    }
+
