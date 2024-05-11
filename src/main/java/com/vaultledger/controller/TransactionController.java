@@ -34,3 +34,15 @@ public class TransactionController {
         return financeService.getTransaction(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        financeService.deleteTransaction(id);
+        return ResponseEntity.noContent().build();
+    }
+}
+
+
+
+
