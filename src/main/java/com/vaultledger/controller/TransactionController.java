@@ -22,3 +22,15 @@ public class TransactionController {
     @GetMapping
     public List<Transaction> list() {
         return financeService.getAllTransactions();
+    }
+
+    @PostMapping
+    public Transaction create(@Valid @RequestBody Transaction transaction) {
+        return financeService.createTransaction(transaction);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Transaction> get(@PathVariable Long id) {
+        return financeService.getTransaction(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
