@@ -10,3 +10,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/transactions")
+@CrossOrigin(origins = "*")
+public class TransactionController {
+
+    private final FinanceService financeService;
+
+    public TransactionController(FinanceService financeService) {
+        this.financeService = financeService;
+    }
+
+    @GetMapping
+    public List<Transaction> list() {
+        return financeService.getAllTransactions();
