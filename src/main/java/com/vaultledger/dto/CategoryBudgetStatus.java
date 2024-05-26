@@ -18,3 +18,13 @@ public class CategoryBudgetStatus {
 
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
+
+    public double getSpent() { return spent; }
+    public void setSpent(double spent) { this.spent = spent; }
+
+    public double getLimit() { return limit; }
+    public void setLimit(double limit) { this.limit = limit; }
+
+    public double getPercentUsed() { return percentUsed; }
+    public void setPercentUsed(double percentUsed) { this.percentUsed = percentUsed; }
+}
