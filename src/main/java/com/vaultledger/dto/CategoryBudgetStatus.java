@@ -8,3 +8,13 @@ public class CategoryBudgetStatus {
     private double percentUsed;
 
     public CategoryBudgetStatus() {}
+
+    public CategoryBudgetStatus(String category, double spent, double limit) {
+        this.category = category;
+        this.spent = spent;
+        this.limit = limit;
+        this.percentUsed = limit > 0 ? (spent / limit) * 100 : 0;
+    }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
