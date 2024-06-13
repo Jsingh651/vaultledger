@@ -28,3 +28,5 @@ public class CategoryBudgetStatus {
     public double getPercentUsed() { return percentUsed; }
     public void setPercentUsed(double percentUsed) { this.percentUsed = percentUsed; }
 }
+
+
