@@ -22,3 +22,15 @@ public class DashboardSummary {
     public double getBalance() { return balance; }
     public void setBalance(double balance) { this.balance = balance; }
 
+    public Map<String, Double> getExpensesByCategory() { return expensesByCategory; }
+    public void setExpensesByCategory(Map<String, Double> expensesByCategory) {
+        this.expensesByCategory = expensesByCategory;
+    }
+
+    public List<CategoryBudgetStatus> getBudgetStatus() { return budgetStatus; }
+    public void setBudgetStatus(List<CategoryBudgetStatus> budgetStatus) {
+        this.budgetStatus = budgetStatus;
+    }
+}
+
+
