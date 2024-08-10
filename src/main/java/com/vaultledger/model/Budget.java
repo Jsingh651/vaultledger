@@ -11,3 +11,16 @@ public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    private String category;
+
+    @NotNull
+    @Positive
+    private Double limitAmount;
+
+    private String month;
+
+    public Budget() {}
+
