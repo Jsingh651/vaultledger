@@ -12,3 +12,17 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    private String description;
+
+    @NotNull
+    @Positive
+    private Double amount;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;
+
+    @NotBlank
