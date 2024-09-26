@@ -20,3 +20,25 @@ public class FinanceService {
     private final TransactionRepository transactionRepo;
     private final BudgetRepository budgetRepo;
 
+    public FinanceService(TransactionRepository transactionRepo, BudgetRepository budgetRepo) {
+        this.transactionRepo = transactionRepo;
+        this.budgetRepo = budgetRepo;
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionRepo.findAll();
+    }
+
+    public Transaction createTransaction(Transaction transaction) {
+        return transactionRepo.save(transaction);
+    }
+
+    public Optional<Transaction> getTransaction(Long id) {
+        return transactionRepo.findById(id);
+    }
+
+    public void deleteTransaction(Long id) {
+        transactionRepo.deleteById(id);
+    }
+
+    public List<Budget> getBudgets(String month) {
