@@ -64,3 +64,25 @@ public class FinanceService {
 
         String currentMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
         List<CategoryBudgetStatus> budgetStatus = budgetRepo.findByMonth(currentMonth).stream()
+                .map(b -> {
+                    Double spent = transactionRepo.sumExpensesByCategory(b.getCategory());
+                    return new CategoryBudgetStatus(
+                            b.getCategory(),
+                            spent != null ? spent : 0,
+                            b.getLimitAmount()
+                    );
+                })
+                .collect(Collectors.toList());
+
+        DashboardSummary summary = new DashboardSummary();
+        summary.setTotalIncome(totalIncome);
+        summary.setTotalExpenses(totalExpenses);
+        summary.setBalance(totalIncome - totalExpenses);
+        summary.setExpensesByCategory(byCategory);
+        summary.setBudgetStatus(budgetStatus);
+        return summary;
+    }
+}
+
+
+
