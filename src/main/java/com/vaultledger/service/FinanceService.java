@@ -42,3 +42,25 @@ public class FinanceService {
     }
 
     public List<Budget> getBudgets(String month) {
+        return budgetRepo.findByMonth(month);
+    }
+
+    public Budget createBudget(Budget budget) {
+        return budgetRepo.save(budget);
+    }
+
+    public DashboardSummary getDashboard() {
+        Double income = transactionRepo.sumByType(TransactionType.INCOME);
+        Double expenses = transactionRepo.sumByType(TransactionType.EXPENSE);
+        double totalIncome = income != null ? income : 0;
+        double totalExpenses = expenses != null ? expenses : 0;
+
+        Map<String, Double> byCategory = transactionRepo.findAll().stream()
+                .filter(t -> t.getType() == TransactionType.EXPENSE)
+                .collect(Collectors.groupingBy(
+                        Transaction::getCategory,
+                        Collectors.summingDouble(Transaction::getAmount)
+                ));
+
+        String currentMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+        List<CategoryBudgetStatus> budgetStatus = budgetRepo.findByMonth(currentMonth).stream()
