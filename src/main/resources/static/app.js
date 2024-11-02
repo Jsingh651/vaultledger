@@ -42,3 +42,25 @@ async function loadDashboard() {
 
   const cats = dash.expensesByCategory || {};
   const maxVal = Math.max(...Object.values(cats), 1);
+  const chartEl = document.getElementById('category-chart');
+  chartEl.innerHTML = Object.entries(cats).map(([name, val]) => `
+    <div class="cat-bar">
+      <span class="cat-name">${name}</span>
+      <div class="cat-track">
+        <div class="cat-fill" style="width:${(val / maxVal) * 100}%"></div>
+      </div>
+      <span class="cat-val">${fmt(val)}</span>
+    </div>
+  `).join('') || '<p style="color:var(--muted)">No expenses yet</p>';
+}
+
+async function deleteTx(id) {
+  await fetch(`/api/transactions/${id}`, { method: 'DELETE' });
+  loadDashboard();
+}
+
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.querySelector('[name="date"]').value = new Date().toISOString().split('T')[0];
+}
+
