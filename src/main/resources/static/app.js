@@ -64,3 +64,25 @@ function openModal() {
   document.querySelector('[name="date"]').value = new Date().toISOString().split('T')[0];
 }
 
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+document.getElementById('tx-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  await fetch('/api/transactions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      description: fd.get('description'),
+      amount: parseFloat(fd.get('amount')),
+      type: fd.get('type'),
+      category: fd.get('category'),
+      date: fd.get('date'),
+    }),
+  });
+  e.target.reset();
+  closeModal();
+  loadDashboard();
+});
