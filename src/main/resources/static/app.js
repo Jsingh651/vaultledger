@@ -86,3 +86,6 @@ document.getElementById('tx-form').addEventListener('submit', async (e) => {
   closeModal();
   loadDashboard();
 });
+
+loadDashboard();
+
