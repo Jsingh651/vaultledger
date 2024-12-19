@@ -103,3 +103,38 @@ td { padding: 0.6rem 0.5rem; border-bottom: 1px solid rgba(42,49,66,0.5); }
 .cat-track { flex: 1; height: 20px; background: var(--border); border-radius: 4px; overflow: hidden; }
 .cat-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #a78bfa); border-radius: 4px; }
 .cat-val { font-size: 0.8rem; width: 60px; text-align: right; }
+
+.modal {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  align-items: center; justify-content: center;
+}
+.modal.open { display: flex; }
+
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 90%; max-width: 400px;
+}
+
+.modal-content h2 { margin-bottom: 1rem; }
+.modal-content input, .modal-content select {
+  display: block; width: 100%; margin-bottom: 0.75rem;
+  padding: 0.6rem; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text);
+}
+
+.modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
+.modal-actions button {
+  padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border);
+  background: transparent; color: var(--text); cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .summary-cards, .content-grid { grid-template-columns: 1fr; }
+}
+
+
